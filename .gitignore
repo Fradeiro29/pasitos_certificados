@@ -1,5 +1,6 @@
 .env
 keys/
+.claude/
 data/*.db
 data/certificados/
 __pycache__/
