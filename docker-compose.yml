@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./keys:/app/keys
+      - ./plantilla_certificado.png:/app/plantilla_certificado.png:ro
+      - ./coordenadas.json:/app/coordenadas.json:ro
+      - "./Pasitos Registro Cursos.xlsx:/app/Pasitos_Registro_Cursos.xlsx:ro"
+    env_file:
+      - .env
+    restart: unless-stopped

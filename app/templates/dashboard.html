@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — Pasitos Certificados{% endblock %}
+{% block content %}
+<h1>Panel de control</h1>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-bottom:2rem;">
+  <div class="card" style="text-align:center;border-top:4px solid #7c3aed;">
+    <div style="font-size:2.8rem;font-weight:800;color:#7c3aed;line-height:1;">{{ total_personas }}</div>
+    <div style="color:#6b7280;font-size:.9rem;margin-top:.4rem;">Personas registradas</div>
+    <a href="/personas" style="display:inline-block;margin-top:.75rem;font-size:.82rem;color:#7c3aed;text-decoration:none;">Ver todas →</a>
+  </div>
+
+  <div class="card" style="text-align:center;border-top:4px solid #7c3aed;">
+    <div style="font-size:2.8rem;font-weight:800;color:#7c3aed;line-height:1;">{{ total_certs }}</div>
+    <div style="color:#6b7280;font-size:.9rem;margin-top:.4rem;">Certificados emitidos</div>
+    <a href="/certificados" style="display:inline-block;margin-top:.75rem;font-size:.82rem;color:#7c3aed;text-decoration:none;">Ver todos →</a>
+  </div>
+
+  {% if ultimo %}
+  <div class="card" style="border-top:4px solid #a78bfa;">
+    <div style="font-size:.72rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;">Último certificado</div>
+    <div style="font-weight:600;color:#1f2937;font-size:.95rem;">{{ ultimo['nombre'] }}</div>
+    <div style="font-size:.82rem;color:#6b7280;margin-top:.2rem;">{{ ultimo['folio'] }}</div>
+    <div style="font-size:.82rem;color:#9ca3af;">{{ ultimo['fecha_emision'] }}</div>
+  </div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>Acciones rápidas</h2>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+    <a href="/certificados" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Emitir certificado
+    </a>
+    <a href="/personas/nueva" class="btn btn-secondary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Registrar persona
+    </a>
+    <a href="/personas/importar" class="btn btn-secondary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Importar Excel
+    </a>
+    <a href="/verificar" class="btn btn-secondary" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Verificador público
+    </a>
+  </div>
+</div>
+{% endblock %}

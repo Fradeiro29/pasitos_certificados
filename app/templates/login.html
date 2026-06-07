@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión — Pasitos Certificados</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f5f3ff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .box { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; width: 100%; max-width: 400px; box-shadow: 0 4px 30px rgba(124,58,237,.13); }
+    .logo { text-align: center; margin-bottom: 2rem; }
+    .logo-icon { width: 56px; height: 56px; background: #7c3aed; border-radius: 14px; margin: 0 auto .75rem; display: flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 32px; height: 32px; fill: #fff; }
+    .logo h1 { color: #7c3aed; font-size: 1.35rem; font-weight: 800; }
+    .logo p  { color: #9ca3af; font-size: .82rem; margin-top: .2rem; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; font-size: .82rem; font-weight: 600; color: #374151; margin-bottom: .3rem; }
+    input { width: 100%; padding: .6rem .9rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: .92rem; transition: border-color .15s, box-shadow .15s; }
+    input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.12); }
+    .btn { width: 100%; background: #7c3aed; color: #fff; border: none; padding: .7rem; border-radius: 8px; font-size: .97rem; font-weight: 600; cursor: pointer; margin-top: .4rem; transition: background .15s; }
+    .btn:hover { background: #6d28d9; }
+    .alert { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; padding: .7rem .9rem; border-radius: 8px; font-size: .85rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      </div>
+      <h1>Pasitos Certificados</h1>
+      <p>Pasitos Education &amp; Health A.C.</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for _, message in messages %}
+          <div class="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post">
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="username" required autocomplete="username" placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn">Iniciar sesión</button>
+    </form>
+  </div>
+</body>
+</html>

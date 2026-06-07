@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Nueva persona — Pasitos Certificados{% endblock %}
+{% block content %}
+<div style="max-width:640px;">
+  <h1>Registrar nueva persona</h1>
+  <div class="card">
+    <form method="post" novalidate>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+
+        <div class="form-group" style="grid-column:1/-1;">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" name="nombre" required
+                 placeholder="Apellido paterno, apellido materno, nombre(s)">
+        </div>
+
+        <div class="form-group" style="grid-column:1/-1;">
+          <label for="curp">CURP *</label>
+          <input type="text" id="curp" name="curp" required
+                 maxlength="18" minlength="18"
+                 pattern="[A-Za-z0-9]{18}"
+                 placeholder="18 caracteres alfanuméricos"
+                 style="font-family:monospace;text-transform:uppercase;"
+                 oninput="this.value=this.value.toUpperCase()">
+          <small style="color:#9ca3af;font-size:.78rem;">Exactamente 18 caracteres (letras mayúsculas y números)</small>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha_nacimiento">Fecha de nacimiento</label>
+          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+        </div>
+
+        <div class="form-group">
+          <label for="grado_estudio">Último grado de estudio</label>
+          <select id="grado_estudio" name="grado_estudio">
+            <option value="">Seleccionar...</option>
+            <option>Primaria</option>
+            <option>Secundaria</option>
+            <option>Preparatoria</option>
+            <option>Técnico Superior</option>
+            <option>Licenciatura</option>
+            <option>Posgrado</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="grid-column:1/-1;">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com">
+        </div>
+
+        <div class="form-group">
+          <label for="institucion">Institución / Guardería</label>
+          <input type="text" id="institucion" name="institucion"
+                 placeholder="Nombre del centro (o N/A)">
+        </div>
+
+        <div class="form-group">
+          <label for="cargo">Cargo o puesto</label>
+          <input type="text" id="cargo" name="cargo"
+                 placeholder="Educadora, Directora... (o N/A)">
+        </div>
+
+      </div>
+
+      <div style="display:flex;gap:.75rem;margin-top:.75rem;">
+        <button type="submit" class="btn btn-primary">Registrar persona</button>
+        <a href="/personas" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
