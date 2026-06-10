@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Read(//c/Users/frado/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/cde9b1b5-c56b-41d4-9b38-530c022076ab/da8a7107-85a4-4c62-9865-0f5c4671d599/skills/xlsx/**)",
-      "Bash(python extract-text *)"
-    ]
-  }
-}
