@@ -5,10 +5,16 @@
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem;">
   <h1 style="margin:0;">Personas registradas</h1>
   <div style="display:flex;gap:.5rem;">
-    <a href="/personas/importar" class="btn btn-secondary">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      Importar Excel
-    </a>
+    <form id="import-form" method="POST" action="/personas/importar"
+          enctype="multipart/form-data" style="display:contents;">
+      <input id="excel-input" type="file" name="archivo_excel" accept=".xlsx,.xls,.csv"
+             style="display:none;" onchange="this.form.submit()">
+      <button type="button" class="btn btn-secondary"
+              onclick="document.getElementById('excel-input').click()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Importar Excel
+      </button>
+    </form>
     <a href="/personas/nueva" class="btn btn-primary">+ Nueva persona</a>
   </div>
 </div>
@@ -56,7 +62,8 @@
     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" style="margin-bottom:.75rem;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     <p>No hay personas registradas.</p>
     <div style="margin-top:1rem;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
-      <a href="/personas/importar" class="btn btn-secondary">Importar desde Excel</a>
+      <button type="button" class="btn btn-secondary"
+              onclick="document.getElementById('excel-input').click()">Importar desde Excel</button>
       <a href="/personas/nueva" class="btn btn-primary">Agregar persona</a>
     </div>
   </div>

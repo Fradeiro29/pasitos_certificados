@@ -18,6 +18,7 @@ from app.routes.verificar_routes import verificar_bp
 template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=template_dir)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev-secret-change-me')
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10 MB máximo por upload
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(personas_bp)

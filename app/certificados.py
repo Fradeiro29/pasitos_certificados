@@ -73,7 +73,7 @@ def _generar_pdf(persona, curso, cert_data, folio):
         x = coords[field]['x']
         y = y_rl(coords[field]['y'], size)
         c.setFont(font, size)
-        c.drawString(x, y, text)
+        c.drawCentredString(x, y, text)
 
     # QR
     if 'qr' in coords:

@@ -1,10 +1,12 @@
+import os
 import re
+import tempfile
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from app.auth import login_required
 from app.database import get_db
-from app.importar import importar_desde_excel
+from app.importar import importar_desde_excel, validar_formato
 
 personas_bp = Blueprint('personas', __name__)
 
@@ -75,10 +77,35 @@ def nueva_persona():
     return render_template('nueva_persona.html')
 
 
-@personas_bp.route('/personas/importar')
+@personas_bp.route('/personas/importar', methods=['POST'])
 @login_required
 def importar_personas():
-    resultado = importar_desde_excel()
+    archivo = request.files.get('archivo_excel')
+
+    if not archivo or archivo.filename == '':
+        flash('No seleccionaste ningún archivo.', 'error')
+        return redirect(url_for('personas.personas'))
+
+    ext = os.path.splitext(archivo.filename)[1].lower()
+    if ext not in {'.xlsx', '.xls', '.csv'}:
+        flash('Archivo no válido: solo se aceptan .xlsx, .xls y .csv con el formato Pasitos.', 'error')
+        return redirect(url_for('personas.personas'))
+
+    # Guardar en archivo temporal conservando la extensión original
+    tmp_fd, tmp_path = tempfile.mkstemp(suffix=ext)
+    try:
+        os.close(tmp_fd)
+        archivo.save(tmp_path)
+
+        errores_fmt = validar_formato(tmp_path)
+        if errores_fmt:
+            flash('Archivo no válido: ' + ' · '.join(errores_fmt), 'error')
+            return redirect(url_for('personas.personas'))
+
+        resultado = importar_desde_excel(tmp_path)
+    finally:
+        os.unlink(tmp_path)
+
     conn = get_db()
     lista = conn.execute('SELECT * FROM personas ORDER BY nombre').fetchall()
     conn.close()
